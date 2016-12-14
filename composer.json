@@ -1,0 +1,9 @@
+{
+    "name": "jbithell/rehersalattend",
+    "description": "Script for managing rehersal attendance",
+    "config": {
+        "disable-tls": true,
+        "secure-http": false
+    }
+
+}

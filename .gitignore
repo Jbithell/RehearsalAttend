@@ -8,6 +8,8 @@ Desktop.ini
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 config.php 
+db.sqlite3
+*.db-journal
 
 # User-specific stuff:
 .idea/
@@ -32,6 +34,7 @@ vendor/
 
 ## File-based project format:
 *.iws
+
 
 ## Plugin-specific files:
 

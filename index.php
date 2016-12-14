@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . "/config.php";
 /**
  * Created by PhpStorm.
  * User: james

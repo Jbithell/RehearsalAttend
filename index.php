@@ -7,3 +7,11 @@ require_once __DIR__ . "/config.php";
  * Time: 04:15 PM
  */
 echo "Test";
+$email = new BluePost\Email(
+    new BluePost\Person("Rehearsal Attendance Manager", "donotreply@rehersalattend.online"),
+    [new BluePost\Person("James TESTER", "james.bithell@westminster.org.uk")], [], [],
+    "This is sent using BlueEmail"
+);
+
+$email->setBody("emails/notification.twig");
+$email->send();

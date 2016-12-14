@@ -45,7 +45,6 @@
 
 			//IMPORT BLUE UTILS SETTINGS
 			global $BLUEUTILS_SETTINGS;
-			
 			//This assumes that twig has already been loaded (probably by BlueUtils.php)
 			//require($BLUEUTILS_SETTINGS->PATH_TO_VENDOR."/autoload.php"); //Include Composer
 
@@ -146,9 +145,9 @@
 			else $customTemplate = false;
 
 			$PAGEDATA = Array (
-				"billing" => $this->twig->loadTemplate('helpers/BlueEMail/themes/billing.twig'),//Load the billing template in case it's based off that
-				"alert" => $this->twig->loadTemplate('helpers/BlueEMail/themes/alert.twig'), //Load the alert template in case it's based off that
-				"action" => $this->twig->loadTemplate('helpers/BlueEMail/themes/action.twig'), //Load the action template in case it's based off that
+				"billing" => $this->twig->loadTemplate('libs/BlueEMail/themes/billing.twig'),//Load the billing template in case it's based off that
+				"alert" => $this->twig->loadTemplate('libs/BlueEMail/themes/alert.twig'), //Load the alert template in case it's based off that
+				"action" => $this->twig->loadTemplate('libs/BlueEMail/themes/action.twig'), //Load the action template in case it's based off that
 				"customTemplate" => $customTemplate,
 				"customVariables" => $customVariables,
 				"basicDetails" => $this->basicdetails
@@ -201,9 +200,11 @@
 			if (!isset($this->body['html'])) throw new Exception("No Body Provided");
 			$this->sendgridemail->addHeader("X-BlueEMail", "1");
 
-			//var_dump($this->sendgridemail->jsonSerialize());
 			//Send the damn thing
-			return $this->sendgrid->client->mail()->send()->post($this->sendgridemail);
+			$send = $this->sendgrid->client->mail()->send()->post($this->sendgridemail);
+			$response = \json_decode($send->body(), true);
+			if (isset($response["errors"])) return false;
+			else return true;
 		}
 
 	}
